@@ -1,5 +1,5 @@
-
-var REMOVE = {
+const REMOVE = {
+	comma: 			[{reg: /,|\.|，|。/g, replacement: ""},],
 	space: 			[{reg: /( |　)/g, replacement: ""},],
 	return: 		[{reg: /\n/g, replacement: ""},],
 	tab: 				[{reg: /\t/g, replacement: ""},],
@@ -7,18 +7,25 @@ var REMOVE = {
 	whiteReturn: [{reg: /(^\s*?(\n|\r\n|\r))+/g, replacement: ""},],
 	bracket:		[{reg: /(\(|\)|（|）)/g, replacement: ""},],
 	htmlTag:		[{reg: /<.+?>|<\/.+?>/g, replacement: ""},],
+	book: [{reg: /\<|\>|《|》/g, replacement: ""},],
+	squareBracket: [{reg: /\[|\]|【|】/g, replacement: ""},],
+	backslash: [{reg: /\\|、/g, replacement: ''}],
+	letter: [{reg: /[a-zA-Z]/g, replacement: ''}],
+	number: [{reg: /\d/g, replacement: ''}],
 	all: []
 }
 
 REMOVE.all = [].concat(
+	REMOVE.comma,
 	REMOVE.space, REMOVE.return,
 	REMOVE.quot, REMOVE.whiteReturn,
 	REMOVE.bracket, REMOVE.tab,
-	REMOVE.htmlTag
+	REMOVE.htmlTag, REMOVE.book,
+	REMOVE.squareBracket, REMOVE.backslash,
+	REMOVE.letter, REMOVE.number
 )
 
-
-var TOZH = {
+const TOZH = {
 	space: [
 		{reg: / /g, replacement: "　"},
 	],
@@ -38,6 +45,10 @@ var TOZH = {
 		{reg: /\(/g, replacement: "（"},
 		{reg: /\)/g, replacement: "）"},
 	],
+	squareBracket: [
+		{reg: /\[/g, replacement: "【"},
+		{reg: /\]/g, replacement: "】"},
+	],
 	quot: [
 		{reg: /"(.*?)"/g, replacement: "“$1”"},
 		{reg: /'(.*?)'/g, replacement: "‘$1’"},
@@ -46,6 +57,13 @@ var TOZH = {
 		{reg: /-/g, replacement: "—"},
 		{reg: /\.\.\./g, replacement: "…"},
 	],
+	book: [
+		{reg: /\</g, replacement: "《"},
+		{reg: /\>/g, replacement: "》"},
+	],
+	backslash: [
+		{reg: /\\/g, replacement: "、"},
+	],
 	all: []
 }
 
@@ -53,10 +71,11 @@ TOZH.all = [].concat(
 	TOZH.space, TOZH.comma,
 	TOZH.questionmark, TOZH.colon,
 	TOZH.bracket, TOZH.quot,
-	TOZH.connector
+	TOZH.connector,  TOZH.book, TOZH.squareBracket,
+	TOZH.backslash
 )
 
-var TOEN = {
+const TOEN = {
 	space: [
 		{reg: /　/g, replacement: " "},
 	],
@@ -80,9 +99,20 @@ var TOEN = {
 		{reg: /（/g, replacement: "("},
 		{reg: /）/g, replacement: ")"},
 	],
+	squareBracket: [
+		{reg: /【/g, replacement: "["},
+		{reg: /】/g, replacement: "]"},
+	],
 	connector: [
 		{reg: /[－—–]/g, replacement: "-"},
 		{reg: /…/g, replacement: "..."},
+	],
+	book: [
+		{reg: /《/g, replacement: "<"},
+		{reg: /》/g, replacement: ">"},
+	],
+	backslash: [
+		{reg: /、/g, replacement: "\\"},
 	],
 	all: []
 }
@@ -90,11 +120,11 @@ TOEN.all = [].concat(
 	TOEN.space, TOEN.comma,
 	TOEN.questionmark, TOEN.colon,
 	TOEN.bracket, TOEN.quot,
-	TOEN.connector
+	TOEN.connector, TOEN.book, TOEN.squareBracket,
+	TOEN.backslash
 )
 
-
-var MATCH = {
+const MATCH = {
 	symbolEn: /[,.:;'"!\?\[\]#@%\^\$\(\)\*\-\=\+\_\<\>\/\\{}`~]/g,
 	symbolCn: /[，。：；”…“《》、？【】『』、（）￥！・—]/g,
 	characterEn: /[a-zA-Z]/g,
@@ -104,14 +134,10 @@ var MATCH = {
 	comma: /[，。,\.]/g,
 }
 
-var textarea;
-
+let textarea;
 window.onload = function () {
 	textarea = $('#text');
 }
-
-
-
 
 function regReplace (regs) {
 	regs.forEach(item => {
@@ -119,7 +145,6 @@ function regReplace (regs) {
 	})
 	updateInfos()
 }
-
 
 
 function $(selector) {

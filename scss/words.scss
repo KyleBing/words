@@ -1,21 +1,24 @@
-$orange:    #FFD46F;
-$text-info: #333333;
-$red:       #FF624A;
-$green:     #12CE70;
-
 @import "reset.css";
 @import "utility";
 @import "variables";
 
 $radius: 5px;
-$font-info: 14px;
-$font-button: 16px;
-$font-text: 14px;
-$font-mobile: 12px;
+$fz-info: 14px;
+$fz-button: 16px;
+$fz-main: 14px;
+$fz-mobile: 12px;
 
+$bg-btn: lighten($orange, 30%);
+$btn-border: lighten($orange, 20%);
+$border: #aaa;
+$text-info: #333333;
+
+textarea{
+  -webkit-appearance: none;
+}
 
 body{
-  background: white url(../../../lib/img/bg_paper.png) 0 0 repeat;
+  background: white url(bg_paper.png) 0 0 repeat;
 }
 
 .red{color: $red;}
@@ -25,80 +28,55 @@ body{
   max-width: 1200px;
   margin: 0 auto;
   padding: 40px;
-  @media (max-width: 1200px) {
-    padding: 10px;
-  }
 }
 
 .content{
   margin-top: 30px;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
-
-  @media (max-width: 1200px) {
-    flex-flow: column nowrap;
-    margin-top: 10px;
-  }
 }
-
 
 textarea{
   font-family: "Consolas", "Monaco", monospace;
   max-width: 100%;
   padding: 10px;
-  font-size: $font-text;
+  font-size: $fz-main;
   display: block;
   width: 100%;
   @include border-radius($radius);
-  border: 1px solid $green;
+  border: 1px solid $border;
   @include transition(box-shadow 0.3s);
   &:focus{
-    @include box-shadow(0 0 0 3px transparentize($green, 0.5));
+    @include box-shadow(0 0 0 3px transparentize($border, 0.8));
     @include transition(box-shadow 0.3s);
   }
 }
 
 .info{
   color: $text-info;
-  margin-right: 20px;
+  margin-right: 30px;
   background-color: white;
-  border: 1px solid $green;
+  border: 1px solid $border;
   width: 180px;
   flex-shrink: 0;
   flex-grow: 0;
-  padding: 10px;
+  padding: 15px;
   @include border-radius($radius);
-  &-item{
-    margin-bottom: 5px;
+  .info-item{
+    margin-bottom: 8px;
     display: flex;
     justify-content: space-between;
-    font-size: $font-info;
+    font-size: $fz-info;
     &:last-child{
       margin-bottom: 0;
     }
     > h6 {
       font-weight: normal;
-      font-size: $font-info;
+      font-size: $fz-info;
     }
     > p{
       text-align: right;
-    }
-  }
-  @media (max-width: 1200px) {
-    margin-bottom: 10px;
-    padding: 8px;
-    display: flex;
-    width: 100%;
-    flex-flow: row wrap;
-    &-item{
-      width: 40%;
-      margin-right: 20%;
-      > h6 {font-size: $font-mobile;}
-      > p {font-size: $font-mobile;}
-      &:nth-child(2n){
-        margin-right: 0;
-      }
     }
   }
 }
@@ -108,58 +86,96 @@ textarea{
 }
 
 .btn-group{
-  margin-bottom: 15px;
+  margin-bottom: 20px;
   align-items: center;
   display: flex;
-  @media (max-width: 1200px) {
-    .btn-group-title{
-      font-size: $font-text;
-      min-width: 50px;
-      padding-right: 10px;
-    }
-  }
-
 }
 .btn-group-title{
+  text-align: right;
   font-weight: bold;
-  min-width: 100px;
+  width: 90px;
+  padding-right: 30px;
   flex-shrink: 0;
-
 }
 .btn-list{
   flex-grow: 1;
   display: flex;
   justify-content: flex-start;
   flex-flow: row wrap;
-
+  .btn{
+    word-spacing: 10px;
+    letter-spacing: 0.5px;
+    @extend .unselectable;
+    cursor: pointer;
+    margin-bottom: 5px;
+    margin-right: 15px;
+    min-width: 10%;
+    @include border-radius(5px);
+    border: 1px solid $btn-border;
+    background-color: $bg-btn;
+    padding: 8px 10px;
+    font-size: $fz-button;
+    color: #000;
+    text-align: center;
+    &:hover{
+      background-color: darken($bg-btn, 5%);
+      border-color: darken($btn-border, 20%);
+    }
+    &:active{
+      @include transform(translateY(2px));
+    }
+  }
 }
-.btn{
-  word-spacing: 10px;
-  letter-spacing: 0.5px;
-  @include unselectable();
-  cursor: pointer;
-  margin-right: 15px;
-  min-width: 10%;
-  @include border-radius(5px);
-  border: 1px solid $orange;
-  background-color: lighten($orange, 10%);
-  padding: 8px 10px;
-  margin-bottom: 5px;
-  font-size: $font-button;
-  color: #000;
-  text-align: center;
-  @media (max-width: 1200px) {
-    padding: 3px 8px;
-    @include border-radius(3px);
-    font-size: $font-text;
+
+@media (max-width: 1200px) {
+  .container{
+    padding: 10px;
+  }
+  .content{
+    flex-flow: column nowrap;
+    margin-top: 15px;
+    align-items: flex-start;
+  }
+  .info{
+    margin-bottom: 20px;
+    margin-right: 0;
+    padding: 10px 15px;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-flow: row wrap;
+    .info-item{
+      width: 40%;
+      margin-right: 20%;
+      line-height: 1.8;
+      margin-bottom: 0;
+      > h6 {font-size: $fz-mobile;}
+      > p {font-size: $fz-mobile;}
+      &:nth-child(2n){
+        margin-right: 0;
+      }
+    }
   }
 
-  &:hover{
-    background-color: $orange;
-    border-color: darken($orange, 10%);
-  }
-  &:active{
-    @include transform(translateY(2px));
+  .btn-group{
+    flex-flow: row nowrap;
+    align-items: flex-start;
+    .btn-group-title{
+      font-size: $fz-main;
+      width: 60px;
+      padding-right: 10px;
+      flex-grow: 0;
+    }
+    .btn-list{
+      .btn{
+        min-width: 23%;
+        margin-right: 2%;
+        margin-bottom: 5px;
+        padding: 5px 10px;
+        @include border-radius(5px);
+        font-size: $fz-main;
+      }
+    }
   }
 
 }

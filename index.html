@@ -31,13 +31,19 @@
 				<dt class="btn-group-title">去除</dt>
 				<dl class="btn-list">
 					<dd class="btn" onclick="regReplace(REMOVE.all)">ALL</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.comma)">逗句号</dd>
 					<dd class="btn" onclick="regReplace(REMOVE.space)">空格</dd>
 					<dd class="btn" onclick="regReplace(REMOVE.return)">换行</dd>
 					<dd class="btn" onclick="regReplace(REMOVE.whiteReturn)">空行</dd>
 					<dd class="btn" onclick="regReplace(REMOVE.tab)">Tab</dd>
 					<dd class="btn" onclick="regReplace(REMOVE.quot)">引号</dd>
 					<dd class="btn" onclick="regReplace(REMOVE.bracket)">括号</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.book)">书名号</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.squareBracket)">方括号</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.backslash)">反斜线</dd>
 					<dd class="btn" onclick="regReplace(REMOVE.htmlTag)">HTML标签</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.letter)">英文</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.number)">数字</dd>
 				</dl>
 			</div>
 
@@ -52,6 +58,9 @@
 					<dd class="btn" onclick="regReplace(TOZH.bracket)">（）</dd>
 					<dd class="btn" onclick="regReplace(TOZH.quot)">“ ”</dd>
 					<dd class="btn" onclick="regReplace(TOZH.connector)">- …</dd>
+					<dd class="btn" onclick="regReplace(TOZH.squareBracket)">[]【】</dd>
+					<dd class="btn" onclick="regReplace(TOZH.book)"><>《》</dd>
+					<dd class="btn" onclick="regReplace(TOZH.backslash)">\ 、</dd>
 				</dl>
 			</div>
 
@@ -66,6 +75,9 @@
 					<dd class="btn" onclick="regReplace(TOEN.bracket)">( )</dd>
 					<dd class="btn" onclick="regReplace(TOEN.quot)">" "</dd>
 					<dd class="btn" onclick="regReplace(TOEN.connector)">- …</dd>
+					<dd class="btn" onclick="regReplace(TOEN.squareBracket)">【】[]</dd>
+					<dd class="btn" onclick="regReplace(TOEN.book)">《》<></dd>
+					<dd class="btn" onclick="regReplace(TOEN.backslash)">、 \</dd>
 				</dl>
 			</div>
 		</div>
