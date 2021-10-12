@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta charset="UTF-8">
+	<meta name='description' content="字符处理, 标点处理, 工具">
+	<meta name='keywords' content="字符处理, 标点处理, 工具">
+	<link rel="shortcut icon" type="image/png" href="words.png">
+	<title>中英标点处理</title>
+	<script src="index.js"></script>
+	<link rel="stylesheet" href="scss/words.css">
+</head>
+<body>
+<div class="container">
+	<textarea oninput="updateInfos()" class="text" id="text" cols="30" rows="15"></textarea>
+
+	<div class="content">
+		<div class="info">
+			<div class="info-item"><h6>总字数</h6><p id="tol">0</p></div>
+			<div class="info-item"><h6>英文字符</h6><p id="englishCharacter">0</p></div>
+			<div class="info-item"><h6>中文标点</h6><p id="symbolChinese">0</p></div>
+			<div class="info-item"><h6>英文标点</h6><p id="symbolEnglish">0</p></div>
+			<div class="info-item"><h6>引号</h6><p id="symbolQuot">0</p></div>
+			<div class="info-item"><h6>空格</h6><p id="space">0</p></div>
+			<div class="info-item"><h6>Tab</h6><p id="tab">0</p></div>
+			<div class="info-item"><h6>逗句号</h6><p id="symbolComma">0</p></div>
+		</div>
+
+		<div class="operations">
+			<div class="btn-group">
+				<dt class="btn-group-title">去除</dt>
+				<dl class="btn-list">
+					<dd class="btn" onclick="regReplace(REMOVE.all)">ALL</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.space)">空格</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.return)">换行</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.whiteReturn)">空行</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.tab)">Tab</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.quot)">引号</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.bracket)">括号</dd>
+					<dd class="btn" onclick="regReplace(REMOVE.htmlTag)">HTML标签</dd>
+				</dl>
+			</div>
+
+			<div class="btn-group">
+				<dt class="btn-group-title red">转中文</dt>
+				<dl class="btn-list">
+					<dd class="btn" onclick="regReplace(TOZH.all)">ALL</dd>
+					<dd class="btn" onclick="regReplace(TOZH.space)">空格</dd>
+					<dd class="btn" onclick="regReplace(TOZH.comma)">，。</dd>
+					<dd class="btn" onclick="regReplace(TOZH.questionmark)">！？</dd>
+					<dd class="btn" onclick="regReplace(TOZH.colon)">；：</dd>
+					<dd class="btn" onclick="regReplace(TOZH.bracket)">（）</dd>
+					<dd class="btn" onclick="regReplace(TOZH.quot)">“ ”</dd>
+					<dd class="btn" onclick="regReplace(TOZH.connector)">- …</dd>
+				</dl>
+			</div>
+
+			<div class="btn-group">
+				<dt class="btn-group-title green">转英文</dt>
+				<dl class="btn-list">
+					<dd class="btn" onclick="regReplace(TOEN.all)">ALL</dd>
+					<dd class="btn" onclick="regReplace(TOEN.space)">空格</dd>
+					<dd class="btn" onclick="regReplace(TOEN.comma)">, .</dd>
+					<dd class="btn" onclick="regReplace(TOEN.questionmark)">! ?</dd>
+					<dd class="btn" onclick="regReplace(TOEN.colon)">; :</dd>
+					<dd class="btn" onclick="regReplace(TOEN.bracket)">( )</dd>
+					<dd class="btn" onclick="regReplace(TOEN.quot)">" "</dd>
+					<dd class="btn" onclick="regReplace(TOEN.connector)">- …</dd>
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="https://hm.baidu.com/hm.js?72453d01a4ce7631ea994d90b95d377b"></script>
+</body>
+</html>
