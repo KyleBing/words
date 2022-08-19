@@ -2,16 +2,6 @@
 @import "utility";
 @import "variables";
 
-$radius: 5px;
-$fz-info: 14px;
-$fz-button: 16px;
-$fz-main: 14px;
-$fz-mobile: 12px;
-
-$bg-btn: lighten($orange, 30%);
-$btn-border: lighten($orange, 20%);
-$border: #aaa;
-$text-info: #333333;
 
 textarea{
   -webkit-appearance: none;
@@ -21,8 +11,8 @@ body{
   background: white url(bg_paper.png) 0 0 repeat;
 }
 
-.red{color: $red;}
-.green{color: $green;}
+.zh{color: $blue;}
+.en{color: $magenta;}
 
 .container{
   max-width: 1200px;
@@ -33,7 +23,7 @@ body{
 .content{
   margin-top: 30px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 }
 
@@ -45,19 +35,20 @@ textarea{
   display: block;
   width: 100%;
   @include border-radius($radius);
-  border: 1px solid $border;
+  border: 1px solid $color-border-textarea;
   @include transition(box-shadow 0.3s);
   &:focus{
-    @include box-shadow(0 0 0 3px transparentize($border, 0.8));
+    border-color: $text-comment;
+    @include box-shadow(0 0 0 5px transparentize(black, 0.9));
     @include transition(box-shadow 0.3s);
   }
 }
 
 .info{
-  color: $text-info;
+  color: $text-subtitle;
   margin-right: 30px;
   background-color: white;
-  border: 1px solid $border;
+  border: 1px solid $color-border-textarea;
   width: 180px;
   flex-shrink: 0;
   flex-grow: 0;
@@ -72,6 +63,7 @@ textarea{
       margin-bottom: 0;
     }
     > h6 {
+      letter-spacing: 0.5px;
       font-weight: normal;
       font-size: $fz-info;
     }
@@ -88,12 +80,13 @@ textarea{
 .btn-group{
   margin-bottom: 20px;
   align-items: center;
-  display: flex;
 }
 .btn-group-title{
-  text-align: right;
+  letter-spacing: 1px;
   font-weight: bold;
   width: 90px;
+  line-height: 1.5;
+  margin-bottom: 10px;
   padding-right: 30px;
   flex-shrink: 0;
 }
@@ -103,23 +96,24 @@ textarea{
   justify-content: flex-start;
   flex-flow: row wrap;
   .btn{
+    letter-spacing: 1px;
     word-spacing: 10px;
-    letter-spacing: 0.5px;
     @extend .unselectable;
     cursor: pointer;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
     margin-right: 15px;
-    min-width: 10%;
+    min-width: 12%;
     @include border-radius(5px);
-    border: 1px solid $btn-border;
-    background-color: $bg-btn;
+    border: 1px solid $color-border;
     padding: 8px 10px;
     font-size: $fz-button;
-    color: #000;
+    color: $text-subtitle;
     text-align: center;
+    background-color: white;
     &:hover{
-      background-color: darken($bg-btn, 5%);
-      border-color: darken($btn-border, 20%);
+      background-color: white;
+      color: $magenta;
+      border-color: $magenta;
     }
     &:active{
       @include transform(translateY(2px));
@@ -160,6 +154,7 @@ textarea{
   .btn-group{
     flex-flow: row nowrap;
     align-items: flex-start;
+    padding: 0 10px;
     .btn-group-title{
       font-size: $fz-main;
       width: 60px;
@@ -168,7 +163,6 @@ textarea{
     }
     .btn-list{
       .btn{
-        min-width: 23%;
         margin-right: 2%;
         margin-bottom: 5px;
         padding: 5px 10px;
