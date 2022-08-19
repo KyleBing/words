@@ -42,7 +42,7 @@ textarea {
   font-family: "Consolas", "Monaco", monospace;
   max-width: 100%;
   padding: 10px;
-  font-size: 14px;
+  font-size: 16px;
   display: block;
   width: 100%;
   -webkit-border-radius: 10px;
@@ -195,7 +195,7 @@ textarea:focus {
     padding: 0 10px;
   }
   .btn-group .btn-group-title {
-    font-size: 14px;
+    font-size: 16px;
     width: 60px;
     padding-right: 10px;
     flex-grow: 0;
@@ -207,6 +207,6 @@ textarea:focus {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 16px;
   }
 }
