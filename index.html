@@ -7,8 +7,8 @@
 	<meta name='keywords' content="字符处理, 标点处理, 工具">
 	<link rel="shortcut icon" type="image/png" href="words.png">
 	<title>中英标点处理</title>
-	<script src="index.js"></script>
-	<link rel="stylesheet" href="scss/words.css?v=20220819102830">
+	<script src="index.js?v=20260323093802"></script>
+	<link rel="stylesheet" href="scss/words.css?v=20260323093802">
 </head>
 <body>
 <div class="container">
@@ -26,6 +26,15 @@
 			<div class="info-item"><h6>逗句号</h6><p id="symbolComma">0</p></div>
 		</div>
 		<div class="operations">
+			<div class="btn-group replace-group">
+				<dt class="btn-group-title">替换</dt>
+				<div class="replace-panel">
+					<input type="text" class="replace-input" id="replaceFind" placeholder="查找" autocomplete="off" />
+					<input type="text" class="replace-input" id="replaceTo" placeholder="替换为" autocomplete="off" />
+					<label class="replace-regex"><input type="checkbox" id="replaceUseRegex" /> 正则匹配</label>
+					<div class="btn" onclick="customReplace()">替换</div>
+				</div>
+			</div>
 			<div class="btn-group">
 				<dt class="btn-group-title">去除</dt>
 				<dl class="btn-list">

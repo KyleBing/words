@@ -146,6 +146,28 @@ function regReplace (regs) {
 	updateInfos()
 }
 
+function customReplace () {
+	const find = $('#replaceFind').value
+	const to = $('#replaceTo').value
+	const useRegex = $('#replaceUseRegex').checked
+	if (find === '') {
+		return
+	}
+	if (useRegex) {
+		let re
+		try {
+			re = new RegExp(find, 'g')
+		} catch (e) {
+			alert('正则表达式无效')
+			return
+		}
+		textarea.value = textarea.value.replace(re, to)
+	} else {
+		textarea.value = textarea.value.split(find).join(to)
+	}
+	updateInfos()
+}
+
 
 function $(selector) {
 	return document.querySelector(selector);
