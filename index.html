@@ -12,83 +12,107 @@
 </head>
 <body>
 <div class="container">
-	<textarea oninput="updateInfos()" class="text" id="text" cols="30" rows="15"></textarea>
+	<div class="workspace">
+		<aside class="sidebar sidebar-left">
+			<div class="toolbar">
+				<div class="toolbar-section">
+					<div class="section-title">替换</div>
+					<div class="replace-panel">
+						<input type="text" class="replace-input" id="replaceFind" placeholder="查找" autocomplete="off" />
+						<input type="text" class="replace-input" id="replaceTo" placeholder="替换为" autocomplete="off" />
+						<label class="replace-regex"><input type="checkbox" id="replaceUseRegex" /> 正则</label>
+						<div class="btn btn-primary" onclick="customReplace()">替换</div>
+					</div>
+				</div>
 
-	<div class="content">
-		<div class="info">
-			<div class="info-item"><h6>总字数</h6><p id="tol">0</p></div>
-			<div class="info-item"><h6>英文字符</h6><p id="englishCharacter">0</p></div>
-			<div class="info-item"><h6>中文标点</h6><p id="symbolChinese">0</p></div>
-			<div class="info-item"><h6>英文标点</h6><p id="symbolEnglish">0</p></div>
-			<div class="info-item"><h6>引号</h6><p id="symbolQuot">0</p></div>
-			<div class="info-item"><h6>空格</h6><p id="space">0</p></div>
-			<div class="info-item"><h6>Tab</h6><p id="tab">0</p></div>
-			<div class="info-item"><h6>逗句号</h6><p id="symbolComma">0</p></div>
-		</div>
-		<div class="operations">
-			<div class="btn-group replace-group">
-				<dt class="btn-group-title">替换</dt>
-				<div class="replace-panel">
-					<input type="text" class="replace-input" id="replaceFind" placeholder="查找" autocomplete="off" />
-					<input type="text" class="replace-input" id="replaceTo" placeholder="替换为" autocomplete="off" />
-					<label class="replace-regex"><input type="checkbox" id="replaceUseRegex" /> 正则匹配</label>
-					<div class="btn" onclick="customReplace()">替换</div>
+				<div class="toolbar-section">
+					<div class="section-title">格式化</div>
+					<dl class="btn-list">
+						<dd class="btn btn-success" onclick="formatAlnumSpace()">英数空格</dd>
+					</dl>
+				</div>
+
+				<div class="toolbar-section">
+					<div class="section-title">去除</div>
+					<dl class="btn-list">
+						<dd class="btn" onclick="regReplace(REMOVE.all)">ALL</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.comma)">逗句号</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.space)">空格</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.return)">换行</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.whiteReturn)">空行</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.tab)">Tab</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.quot)">引号</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.bracket)">括号</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.book)">书名号</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.squareBracket)">方括号</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.backslash)">反斜线</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.htmlTag)">HTML</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.letter)">英文</dd>
+						<dd class="btn" onclick="regReplace(REMOVE.number)">数字</dd>
+					</dl>
 				</div>
 			</div>
-			<div class="btn-group">
-				<dt class="btn-group-title">去除</dt>
-				<dl class="btn-list">
-					<dd class="btn" onclick="regReplace(REMOVE.all)">ALL</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.comma)">逗句号</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.space)">空格</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.return)">换行</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.whiteReturn)">空行</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.tab)">Tab</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.quot)">引号</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.bracket)">括号</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.book)">书名号</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.squareBracket)">方括号</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.backslash)">反斜线</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.htmlTag)">HTML标签</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.letter)">英文</dd>
-					<dd class="btn" onclick="regReplace(REMOVE.number)">数字</dd>
-				</dl>
-			</div>
+		</aside>
 
-			<div class="btn-group">
-				<dt class="btn-group-title zh">转中文</dt>
-				<dl class="btn-list">
-					<dd class="btn" onclick="regReplace(TOZH.all)">ALL</dd>
-					<dd class="btn" onclick="regReplace(TOZH.space)">空格</dd>
-					<dd class="btn" onclick="regReplace(TOZH.comma)">，。</dd>
-					<dd class="btn" onclick="regReplace(TOZH.questionmark)">！？</dd>
-					<dd class="btn" onclick="regReplace(TOZH.colon)">；：</dd>
-					<dd class="btn" onclick="regReplace(TOZH.bracket)">（）</dd>
-					<dd class="btn" onclick="regReplace(TOZH.quot)">“ ”</dd>
-					<dd class="btn" onclick="regReplace(TOZH.connector)">- …</dd>
-					<dd class="btn" onclick="regReplace(TOZH.squareBracket)">[]【】</dd>
-					<dd class="btn" onclick="regReplace(TOZH.book)"><>《》</dd>
-					<dd class="btn" onclick="regReplace(TOZH.backslash)">\ 、</dd>
-				</dl>
+		<div class="editor-area">
+			<div class="info">
+				<div class="info-stats">
+					<div class="info-item"><h6>总字数</h6><p id="tol">0</p></div>
+					<div class="info-item"><h6>英文字符</h6><p id="englishCharacter">0</p></div>
+					<div class="info-item"><h6>中文标点</h6><p id="symbolChinese">0</p></div>
+					<div class="info-item"><h6>英文标点</h6><p id="symbolEnglish">0</p></div>
+					<div class="info-item"><h6>引号</h6><p id="symbolQuot">0</p></div>
+					<div class="info-item"><h6>空格</h6><p id="space">0</p></div>
+					<div class="info-item"><h6>Tab</h6><p id="tab">0</p></div>
+					<div class="info-item"><h6>逗句号</h6><p id="symbolComma">0</p></div>
+					<div class="info-item"><h6>已选字数</h6><p id="selectedCount">0</p></div>
+				</div>
+				<div class="info-actions">
+					<div class="btn btn-secondary btn-history" id="btnUndo" onclick="undo()" title="撤销 Ctrl+Z">撤销</div>
+					<div class="btn btn-secondary btn-history" id="btnRedo" onclick="redo()" title="重做 Ctrl+Y">重做</div>
+					<div class="btn btn-warning btn-history" id="btnClear" onclick="clearHistory()" title="清空内容与历史记录">清空</div>
+				</div>
 			</div>
-
-			<div class="btn-group">
-				<dt class="btn-group-title en">转英文</dt>
-				<dl class="btn-list">
-					<dd class="btn" onclick="regReplace(TOEN.all)">ALL</dd>
-					<dd class="btn" onclick="regReplace(TOEN.space)">空格</dd>
-					<dd class="btn" onclick="regReplace(TOEN.comma)">, .</dd>
-					<dd class="btn" onclick="regReplace(TOEN.questionmark)">! ?</dd>
-					<dd class="btn" onclick="regReplace(TOEN.colon)">; :</dd>
-					<dd class="btn" onclick="regReplace(TOEN.bracket)">( )</dd>
-					<dd class="btn" onclick="regReplace(TOEN.quot)">" "</dd>
-					<dd class="btn" onclick="regReplace(TOEN.connector)">- …</dd>
-					<dd class="btn" onclick="regReplace(TOEN.squareBracket)">【】[]</dd>
-					<dd class="btn" onclick="regReplace(TOEN.book)">《》<></dd>
-					<dd class="btn" onclick="regReplace(TOEN.backslash)">、 \</dd>
-				</dl>
-			</div>
+			<textarea class="text" id="text" cols="30" rows="15"></textarea>
 		</div>
+
+		<aside class="sidebar sidebar-right">
+			<div class="toolbar">
+				<div class="toolbar-section">
+					<div class="section-title zh">转中文</div>
+					<dl class="btn-list">
+						<dd class="btn btn-zh" onclick="regReplace(TOZH.all)">ALL</dd>
+						<dd class="btn btn-zh" onclick="regReplace(TOZH.space)">空格</dd>
+						<dd class="btn btn-zh" onclick="regReplace(TOZH.comma)">，。</dd>
+						<dd class="btn btn-zh" onclick="regReplace(TOZH.questionmark)">！？</dd>
+						<dd class="btn btn-zh" onclick="regReplace(TOZH.colon)">；：</dd>
+						<dd class="btn btn-zh" onclick="regReplace(TOZH.bracket)">（）</dd>
+						<dd class="btn btn-zh" onclick="regReplace(TOZH.quot)">“ ”</dd>
+						<dd class="btn btn-zh" onclick="regReplace(TOZH.connector)">- …</dd>
+						<dd class="btn btn-zh" onclick="regReplace(TOZH.squareBracket)">[]【】</dd>
+						<dd class="btn btn-zh" onclick="regReplace(TOZH.book)"><>《》</dd>
+						<dd class="btn btn-zh" onclick="regReplace(TOZH.backslash)">\ 、</dd>
+					</dl>
+				</div>
+
+				<div class="toolbar-section">
+					<div class="section-title en">转英文</div>
+					<dl class="btn-list">
+						<dd class="btn btn-en" onclick="regReplace(TOEN.all)">ALL</dd>
+						<dd class="btn btn-en" onclick="regReplace(TOEN.space)">空格</dd>
+						<dd class="btn btn-en" onclick="regReplace(TOEN.comma)">, .</dd>
+						<dd class="btn btn-en" onclick="regReplace(TOEN.questionmark)">! ?</dd>
+						<dd class="btn btn-en" onclick="regReplace(TOEN.colon)">; :</dd>
+						<dd class="btn btn-en" onclick="regReplace(TOEN.bracket)">( )</dd>
+						<dd class="btn btn-en" onclick="regReplace(TOEN.quot)">" "</dd>
+						<dd class="btn btn-en" onclick="regReplace(TOEN.connector)">- …</dd>
+						<dd class="btn btn-en" onclick="regReplace(TOEN.squareBracket)">【】[]</dd>
+						<dd class="btn btn-en" onclick="regReplace(TOEN.book)">《》<></dd>
+						<dd class="btn btn-en" onclick="regReplace(TOEN.backslash)">、 \</dd>
+					</dl>
+				</div>
+			</div>
+		</aside>
 	</div>
 </div>
 <script src="https://hm.baidu.com/hm.js?72453d01a4ce7631ea994d90b95d377b"></script>
